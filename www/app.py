@@ -6,14 +6,17 @@ __author__ = 'Michael Liao'
 import time
 import json
 import os
-from handlers import cookie2user, COOKIE_NAME
-from coroweb import add_routes, add_static
+from user.controller.usercontroller import cookie2user, COOKIE_NAME
+from coroweb import add_routes, add_static,scanController
+
 import orm
 from config import configs
 from jinja2 import Environment, FileSystemLoader
 from aiohttp import web
 from datetime import datetime
 import asyncio
+
+
 '''
 async web application.
 '''
@@ -152,7 +155,10 @@ def init(loop):
     app = web.Application(loop=loop, middlewares=[
         logger_factory, auth_factory, response_factory
     ])
-    init_jinja2(app, filters=dict(datetime=datetime_filter))
+    init_jinja2(app, filters=dict(datetime=datetime_filter))  
+    
+    #扫描controller,加入url过滤
+    scanController(app)
     add_routes(app, 'handlers')
     add_static(app)
     srv = yield from loop.create_server(app.make_handler(), '127.0.0.1', 9000)
