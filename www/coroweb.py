@@ -43,6 +43,15 @@ def post(path):
         return wrapper
     return decorator
 
+def get_page_index(page_str):
+    p = 1
+    try:
+        p = int(page_str)
+    except ValueError as e:
+        pass
+    if p < 1:
+        p = 1
+    return p
 
 def get_required_kw_args(fn):
     args = []
@@ -200,7 +209,7 @@ def scanController(app):
     rootpath = os.path.dirname(os.path.realpath(__file__))
     modulename=''
     for dirpath, dirnames, filenames in os.walk(rootpath):
-        if dirpath.endswith("controller"):
+        if dirpath.endswith("controller") and  '__init__.py' in filenames:
             for filename in filenames:
                 if filename.endswith("controller.py"):
                     #拼接成A.B.xxcontroller进行模块引入

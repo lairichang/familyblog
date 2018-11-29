@@ -11,7 +11,7 @@ import markdown2
 
 from aiohttp import web
 
-from coroweb import get, post
+from coroweb import get, post, get_page_index
 from apis import Page, APIValueError, APIResourceNotFoundError
 
 from models import Comment, Blog, next_id
@@ -20,16 +20,9 @@ def check_admin(request):
     if request.__user__ is None or not request.__user__.admin:
         raise APIPermissionError()
 
-def get_page_index(page_str):
-    p = 1
-    try:
-        p = int(page_str)
-    except ValueError as e:
-        pass
-    if p < 1:
-        p = 1
-    return p
-
+def text2html(text):
+    lines = map(lambda s: '<p>%s</p>' % s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;'), filter(lambda s: s.strip() != '', text.split('\n')))
+    return ''.join(lines)
 
 @get('/')
 def index(*, page='1'):
@@ -57,6 +50,18 @@ def get_blog(id):
         '__template__': 'blog.html',
         'blog': blog,
         'comments': comments
+    }
+
+
+@get('/platform/')
+def platform():
+    return 'redirect:/platform/index'
+
+@get('/platform/index')
+def platform_index(*, page='1'):
+    return {
+        '__template__': '/platform/page/main.html',
+        'page_index': get_page_index(page)
     }
 
 @get('/manage/')

@@ -6,7 +6,7 @@ __author__ = 'Michael Liao'
 import time
 import json
 import os
-from user.controller.usercontroller import cookie2user, COOKIE_NAME
+from src.user.controller.usercontroller import cookie2user, COOKIE_NAME
 from coroweb import add_routes, add_static,scanController
 
 import orm

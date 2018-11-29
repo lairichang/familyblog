@@ -7,7 +7,7 @@ import re, time, json, logging, hashlib, base64, asyncio
 
 from aiohttp import web
 
-from coroweb import get, post
+from coroweb import get, post,get_page_index
 from apis import Page, APIError, APIValueError, APIResourceNotFoundError
 
 from models import User, next_id
@@ -25,10 +25,6 @@ def user2cookie(user, max_age):
     s = '%s-%s-%s-%s' % (user.id, user.passwd, expires, _COOKIE_KEY)
     L = [user.id, expires, hashlib.sha1(s.encode('utf-8')).hexdigest()]
     return '-'.join(L)
-
-def text2html(text):
-    lines = map(lambda s: '<p>%s</p>' % s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;'), filter(lambda s: s.strip() != '', text.split('\n')))
-    return ''.join(lines)
 
 @asyncio.coroutine
 def cookie2user(cookie_str):
