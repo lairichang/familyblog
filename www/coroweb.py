@@ -170,7 +170,6 @@ def add_static(app):
     app.router.add_static('/static/', path)
     logging.info('add static %s => %s' % ('/static/', path))
 
-
 def add_route(app, fn):
     method = getattr(fn, '__method__', None)
     path = getattr(fn, '__route__', None)
@@ -218,3 +217,17 @@ def scanController(app):
                         modulename=modulename[1:] +'.'+ filename.replace('.py','')
 
                     add_routes(app,modulename)
+
+
+'''
+扫描所有的前端业务js，添加至静态router
+'''
+def scanBusJs(app):
+    #初始静态js
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
+    app.router.add_static('/static/', path)
+    logging.info('add static %s => %s' % ('/static/', path))
+    #增加业务js
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates','platform','js')
+    app.router.add_static('/platformjs/', path)
+    logging.info('add platformjs %s => %s' % ('/platformjs/', path))

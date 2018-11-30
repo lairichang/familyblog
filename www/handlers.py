@@ -57,10 +57,14 @@ def get_blog(id):
 def platform():
     return 'redirect:/platform/index'
 
+@get('/platform')
+def platform2():
+    return 'redirect:/platform/index'
+
 @get('/platform/index')
 def platform_index(*, page='1'):
     return {
-        '__template__': '/platform/page/main.html',
+        '__template__': 'platform.html',
         'page_index': get_page_index(page)
     }
 

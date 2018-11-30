@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>运维主页</title>
+    <link rel="stylesheet" href="/static/css/uikit.min.css">
+    <link rel="stylesheet" href="/static/css/uikit.gradient.min.css">
+    <link rel="stylesheet" href="/static/css/awesome.css" />
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.easyui.min.js"></script>    
+    <script src="/static/js/sha1.min.js"></script>
+    <script src="/static/js/uikit.min.js"></script>
+    <script src="/static/js/sticky.min.js"></script>
+    <script src="/static/js/vue.min.js"></script>
+    <script src="/static/js/awesome.js"></script>
+    <script src="/static/js/main.js"></script>    
+</head>
+<body>
+    <!-- 导航 -->
+    <nav id="daohang" class="uk-navbar uk-navbar-attached">
+        <div id="menudiv" class="nav-menu">
+                <img style="margin-top:25%" src="/../static/img/menu.png" width="18" alt="" />
+        </div>
+        <div class="uk-navbar-brand">           
+            <a href="/platform/" class="uk-navbar-brand"><img src="" alt="" />主页</a>           
+        </div>
+        <div class="uk-navbar-flip">
+            <ul class="uk-navbar-nav">
+            {% if __user__ %}
+                <li class="uk-parent" data-uk-dropdown>
+                    <a href="#0"><i class="uk-icon-user"></i> {{ __user__.name }}</a>
+                    <div class="uk-dropdown uk-dropdown-navbar">
+                        <ul class="uk-nav uk-nav-navbar">
+                            <li><a href="/signout"><i class="uk-icon-sign-out"></i> 注销</a></li>
+                        </ul>
+                    </div>
+                </li>
+            {% else %}
+                <li><a href="/signin"><i class="uk-icon-sign-in"></i> 登录</a></li>
+                <li><a href="/register"><i class="uk-icon-edit"></i> 注册</a></li>
+            {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 抽屉式边栏 -->
+    <div id="menupage" class="uk-offcanvas">
+        <div class="uk-offcanvas-bar">
+            <ul class="uk-nav uk-nav-offcanvas uk-nav-parent-icon" data-uk-nav="">
+                    <li><a href="javascript:void(0);">管理菜单</a></li>
+                    <li><a href="javascript:void(0);">Active</a></li>
+                    <li class="uk-parent" aria-expanded="true">
+                        <a href="#"><i class="uk-icon-star"></i>Parent</a>                           
+                        <ul class="uk-nav-sub">
+                            <li><a href=""><i class="uk-icon-twitter"></i>Sub item</a></li>
+                            <li><a href="">Sub item</a>
+                                <ul>
+                                    <li><a href="">Sub item</a></li>
+                                    <li><a href="">Sub item</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>  
+                </ul>
+        </div>
+    </div>
+
+    <div id="contentdiv" style="width:100%;">       
+        <!-- content -->        
+    </div>
+
+    <div class="footer">
+            <div  style="background-color:#cbd9ea; border-top:1px solid #ccc;">
+                    <div class="uk-container uk-container-center uk-text-center">
+                        <div class="uk-panel uk-margin-top uk-margin-bottom">
+                            <p>
+                                <a target="_blank" href="http://weibo.com/liaoxuefeng" class="uk-icon-button uk-icon-weibo"></a>
+                                <a target="_blank" href="https://github.com/michaelliao" class="uk-icon-button uk-icon-github"></a>
+                                <a target="_blank" href="http://www.linkedin.com/in/liaoxuefeng" class="uk-icon-button uk-icon-linkedin-square"></a>
+                                <a target="_blank" href="https://twitter.com/liaoxuefeng" class="uk-icon-button uk-icon-twitter"></a>
+                            </p>
+                            <p>Powered by <a href="http://awesome.liaoxuefeng.com">Awesome Python Webapp</a>. Copyright &copy; 2014. [<a href="/manage/" target="_blank">Manage</a>]</p>
+                            <p><a href="http://www.liaoxuefeng.com/" target="_blank">www.liaoxuefeng.com</a>. All rights reserved.</p>                
+                        </div>
+            
+                    </div>
+                </div>
+    </div>
+   
+</body>
+</html>

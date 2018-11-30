@@ -1,0 +1,52 @@
+<html>
+<head>
+    <title>用户管理</title>
+</head>
+<body>
+    <script src="/platformjs/manage_users.js"  />
+    <div id="menuurl">
+
+    </div>   
+    <div id="datagrid">         
+           <nav id="gridbar" class="uk-navbar toolbar uk-navbar-attached">                
+                <div id="title" class="uk-navbar-brand" >           
+                    <a href="javascript:void(0);" class="uk-navbar-brand" style="color: black"><i class="uk-icon-home"></i> URL导航</a>           
+                </div>
+        
+            <div class="uk-navbar-content uk-navbar-flip  uk-hidden-small">
+                <div class="uk-button-group">
+                    <button id="btnAdd" class="uk-button uk-button-primary" click="btnAdd_Onclick();"><i class="uk-icon-plus"></i>新增</button>
+                    <button id="btnEdit" class="uk-button uk-button-primary" data-uk-button><i class="uk-icon-edit"></i>修改</button>
+                    <button id="btnDel" class="uk-button uk-button-primary"><i class="uk-icon-times"></i>删除</button>
+                </div>
+            </div>
+            </nav>
+            <table class="uk-table">
+                    <caption>用户列表</caption>
+                    <thead>
+                        <tr>
+                            <th>...</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <td>...</td>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <td>...</td>
+                        </tr>
+                    </tbody>
+                </table>
+    </div>
+    <div id="pagination" >
+            <ul class="uk-pagination">
+                    <li><a href="">...</a></li>
+                    <li class="uk-active"><span>...</span></li>
+                    <li class="uk-disabled"><span>...</span></li>
+                    <li><span>...</span></li>
+            </ul>
+    </div>
+</body>
+</html>

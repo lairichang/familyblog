@@ -7,7 +7,7 @@ import time
 import json
 import os
 from src.user.controller.usercontroller import cookie2user, COOKIE_NAME
-from coroweb import add_routes, add_static,scanController
+from coroweb import add_routes, scanBusJs,scanController
 
 import orm
 from config import configs
@@ -70,7 +70,8 @@ def auth_factory(app, handler):
             if user:
                 logging.info('set current user: %s' % user.email)
                 request.__user__ = user
-        if request.path.startswith('/manage/') and (request.__user__ is None or not request.__user__.admin):
+        #进行用户校验，强制登录
+        if (request.path.startswith('/manage/') or request.path.find("/platform/")>-1) and (request.__user__ is None or not request.__user__.admin):
             return web.HTTPFound('/signin')
         return (yield from handler(request))
     return auth
@@ -160,7 +161,8 @@ def init(loop):
     #扫描controller,加入url过滤
     scanController(app)
     add_routes(app, 'handlers')
-    add_static(app)
+    scanBusJs(app)
+    # add_static(app)
     srv = yield from loop.create_server(app.make_handler(), '127.0.0.1', 9000)
     logging.info('server started at http://127.0.0.1:9000...')
     return srv

@@ -136,3 +136,14 @@ def api_register_user(*, email, name, passwd):
     r.content_type = 'application/json'
     r.body = json.dumps(user, ensure_ascii=False).encode('utf-8')
     return r
+
+@get('/platform/manage_users_url/')
+def manage_users_url():
+    return 'redirect:/platform/manage_users_page'
+
+@get('/platform/manage_users_page')
+def manage_users_page(*, page='1'):
+    return {
+        '__template__': '/platform/page/manage_users.html',
+        'page_index': get_page_index(page)
+    }
